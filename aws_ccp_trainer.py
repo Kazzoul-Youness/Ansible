@@ -1371,13 +1371,18 @@ if st.session_state.page == "exam":
         st.session_state.show_answer = True
 
     if st.session_state.show_answer:
-        correct = ", ".join([q["choices"][i] for i in q["answer"]])
-        user_answer = st.session_state.answers.get(st.session_state.q_index, [])
-
-        if sorted(user_answer) == sorted(q["answer"]):
-            st.success(f"✅ Correct ! Réponse : {correct}")
-        else:
-            st.error(f"❌ Incorrect. Bonne réponse : {correct}")
+        for index in q["answer"]:
+            st.markdown(
+                (
+                    "<div style='background-color:#d4edda;"
+                    "padding:0.5rem 0.75rem;"
+                    "border-radius:0.5rem;"
+                    "margin-bottom:0.5rem;'>"
+                    f"{q['choices'][index]}"
+                    "</div>"
+                ),
+                unsafe_allow_html=True,
+            )
 
     # =============================
     # NAVIGATION
